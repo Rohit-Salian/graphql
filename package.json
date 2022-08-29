@@ -6,8 +6,7 @@
   "scripts": {
     "app": "cd app && npm run start",
     "api": "cd api && npm run start",
-    "start": "run-p app api",
-    "build":"cd app && npm run build && cd api && npm run build"
+    "start": "run-p app api"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
