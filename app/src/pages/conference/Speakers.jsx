@@ -1,8 +1,19 @@
-import * as React from "react";
 import "./style-sessions.css";
-import { useParams } from "react-router-dom";
-import { gql, useQuery, useMutation } from "@apollo/client";
 
+import * as React from "react";
+
+import { gql, useMutation, useQuery } from "@apollo/client";
+
+import { useParams } from "react-router-dom";
+
+const FEATURED_SPEAKER = gql`
+  mutation markFeatured($speakerId: ID!, $featured: Boolean!) {
+    markFeatured(speakerId: $speakerId, featured: $featured) {
+      id
+      featured
+    }
+  }
+`;
 const SPEAKER_ATTRIBUTES = gql`
   fragment SpeakerInfo on Speaker{
       id
@@ -16,14 +27,6 @@ const SPEAKER_ATTRIBUTES = gql`
     }
 `;
 
-const FEATURED_SPEAKER = gql`
-  mutation markFeatured($speakerId: ID!, $featured: Boolean!) {
-    markFeatured(speakerId: $speakerId, featured: $featured) {
-      id
-      featured
-    }
-  }
-`;
 
 // define speaker query
 const SPEAKERS = gql`
