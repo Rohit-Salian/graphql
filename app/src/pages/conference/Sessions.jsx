@@ -1,8 +1,10 @@
-import React, {useState} from "react";  
 import "./style-sessions.css";
-import { gql, useQuery, useMutation } from "@apollo/client"
+
+import { Field, Form, Formik } from "formik"
+import React, {useState} from "react";
+import { gql, useMutation, useQuery } from "@apollo/client"
+
 import { Link } from "react-router-dom"
-import { Formik, Field, Form } from "formik"
 
 const SESSIONS_ATTRIBUTES = gql`
   fragment SessionInfo on Session {
@@ -28,6 +30,15 @@ const CREATE_SESSION = gql`
   ${SESSIONS_ATTRIBUTES}
 `;
 
+
+const ALL_SESSIONS = gql`
+	query sessions {
+    sessions {
+      ...SessionInfo
+    }
+	}
+  ${SESSIONS_ATTRIBUTES}
+`;
 // Define the query
 const SESSIONS = gql`
 	query sessions($day: String!) {
@@ -45,14 +56,6 @@ const SESSIONS = gql`
 `;
 
 
-const ALL_SESSIONS = gql`
-	query sessions {
-    sessions {
-      ...SessionInfo
-    }
-	}
-  ${SESSIONS_ATTRIBUTES}
-`;
 
 function AllSessionList() {
   const { loading, error, data } = useQuery(ALL_SESSIONS);

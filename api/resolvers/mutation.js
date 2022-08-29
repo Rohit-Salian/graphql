@@ -92,10 +92,11 @@ module.exports = {
   },
   toggleFavoriteSession: async (parent, args, context, info) => {
     if (context.user) {
-      const user = await context.dataSources.userDataSource.toggleFavoriteSession(
-        args.sessionId,
-        context.user.sub
-      );
+      const user =
+        await context.dataSources.userDataSource.toggleFavoriteSession(
+          args.sessionId,
+          context.user.sub
+        );
       return user;
     }
     return undefined;

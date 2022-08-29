@@ -1,19 +1,20 @@
-import React from "react";
+import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client"
+import { Route, BrowserRouter as Router, Switch } from "react-router-dom";
+
+import { Conference } from "./pages/conference/Conference";
+import { Footer } from "./Footer";
+import { Header } from "./Header";
 import { Home } from "./pages/home/Home";
 import { Media } from "./pages/media/Media";
 import { OurStory } from "./pages/our-story/OurStory";
+import React from "react";
 import { Robotics } from "./pages/robotics/Robotics";
-import { Conference } from "./pages/conference/Conference";
-import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import { Header } from "./Header";
-import { Footer } from "./Footer";
-import { ApolloClient, ApolloProvider, HttpLink, InMemoryCache } from "@apollo/client"
 
 // Initialize Apollo Client
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
-    uri: "http://localhost:4000/graphql" // your graphql server link
+    uri: "http://localhost:4000/graphql" 
   }),
   credentials: "same-origin",
 })
@@ -41,7 +42,6 @@ function AppRouter() {
               <Home />
             </Route>
           </Switch>
-        }
         <Footer />
       </Router>
     </div>
